@@ -1,0 +1,9 @@
+apiVersion: v2
+name: arch-profiles-kafka
+version: 1.0.0
+description: ArchHomework Kafka
+type: application
+maintainers:
+  - name: Yuriy Gorelov
+    email: gur-ok@yandex.ru
+appVersion: 1.0.0

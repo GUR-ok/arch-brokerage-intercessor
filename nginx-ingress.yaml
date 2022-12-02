@@ -1,0 +1,25 @@
+controller:
+  kind: DaemonSet
+  extraArgs:
+    metrics-per-host: false
+
+  reportNodeInternalIp: true
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "10254"
+  metrics:
+    enabled: true
+    serviceMonitor:
+      additionalLabels:
+        release: prometheus
+      enabled: true
+
+  hostPort:
+    enabled: true
+    ports:
+      http: 80
+      https: 443
+
+  service:
+    type: NodePort
+

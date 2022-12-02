@@ -1,0 +1,126 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chart.name" . }}-deployment
+  namespace: arch-gur
+  labels:
+    app: {{ include "chart.name" . }}-app
+spec:
+  replicas: {{ .Values.deployment.app.replicas }}
+  selector:
+    matchLabels:
+      app: {{ include "chart.name" . }}-app
+  template:
+    metadata:
+      labels:
+        app: {{ include "chart.name" . }}-app
+    spec:
+      containers:
+        - name: {{ include "chart.name" . }}-app
+          image: {{ .Values.deployment.app.image }}
+          ports:
+            - name: web
+              containerPort: {{ .Values.deployment.app.port }}
+            - name: actuator
+              containerPort: 9090
+          livenessProbe:
+            httpGet:
+              port: 9090
+              path: /health
+            initialDelaySeconds: 90
+            periodSeconds: 20
+            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              port: 9090
+              path: /health
+            initialDelaySeconds: 90
+            periodSeconds: 10
+          env:
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.config.name }}
+                  key: SERVER_PORT
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: DATABASE_URL
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: DATABASE_NAME
+            - name: DATABASE_SCHEMA
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: DATABASE_SCHEMA
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: SPRING_DATASOURCE_USERNAME
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: SPRING_DATASOURCE_PASSWORD
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.config.name }}
+                  key: SPRING_PROFILES_ACTIVE
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "chart.name" . }}-postgresql-deployment
+  namespace: arch-gur
+spec:
+  serviceName: "postgres"
+  replicas: {{ .Values.deployment.db.replicas }}
+  selector:
+    matchLabels:
+      app: {{ include "chart.name" . }}-postgresql
+  template:
+    metadata:
+      labels:
+        app: {{ include "chart.name" . }}-postgresql
+    spec:
+      containers:
+        - name: postgres
+          image: {{ .Values.deployment.db.image }}
+          ports:
+            - containerPort: {{ .Values.deployment.db.port }}
+              name: postgredb
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: DATABASE_NAME
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: SPRING_DATASOURCE_USERNAME
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: SPRING_DATASOURCE_PASSWORD
+          volumeMounts:
+            - name: postgredb
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+  volumeClaimTemplates:
+    - metadata:
+        name: postgredb
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: standard
+        resources:
+          requests:
+            storage: 1Gi

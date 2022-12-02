@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.config.name }}
+  namespace: arch-gur
+data:
+  SERVER_PORT: "{{ .Values.config.port }}"
+  SPRING_PROFILES_ACTIVE: ""
