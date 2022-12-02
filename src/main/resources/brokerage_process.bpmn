@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0san9m5" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.10.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="BROKERAGE_PROCESS_KEY" name="Brokerage" isExecutable="true" camunda:versionTag="tag">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1uldwim</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1uldwim" sourceRef="StartEvent_1" targetRef="Activity_1hp9p4a" />
+    <bpmn:endEvent id="Event_0xev7uq">
+      <bpmn:incoming>Flow_02r0av8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_1hp9p4a" name="CreateClaim" camunda:delegateExpression="${createClaim}">
+      <bpmn:incoming>Flow_1uldwim</bpmn:incoming>
+      <bpmn:outgoing>Flow_0n837rs</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0n837rs" sourceRef="Activity_1hp9p4a" targetRef="Activity_0prm08y" />
+    <bpmn:sequenceFlow id="Flow_02r0av8" sourceRef="Activity_0prm08y" targetRef="Event_0xev7uq" />
+    <bpmn:userTask id="Activity_0prm08y" name="DONE">
+      <bpmn:incoming>Flow_0n837rs</bpmn:incoming>
+      <bpmn:outgoing>Flow_02r0av8</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmn:error id="Error_07wvjju" name="Error_3do1n36" errorCode="delegateCancelableError" />
+  <bpmn:message id="Message_1b2ehof" name="Message_3hnpepu" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="BROKERAGE_PROCESS_KEY">
+      <bpmndi:BPMNEdge id="Flow_1uldwim_di" bpmnElement="Flow_1uldwim">
+        <di:waypoint x="208" y="117" />
+        <di:waypoint x="310" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0n837rs_di" bpmnElement="Flow_0n837rs">
+        <di:waypoint x="410" y="117" />
+        <di:waypoint x="500" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02r0av8_di" bpmnElement="Flow_02r0av8">
+        <di:waypoint x="600" y="117" />
+        <di:waypoint x="742" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1rtwh7o_di" bpmnElement="Activity_1hp9p4a">
+        <dc:Bounds x="310" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="172" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0xev7uq_di" bpmnElement="Event_0xev7uq">
+        <dc:Bounds x="742" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_17xagcq_di" bpmnElement="Activity_0prm08y">
+        <dc:Bounds x="500" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

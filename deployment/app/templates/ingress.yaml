@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ingress.name }}
+  namespace: arch-gur
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: /otusapp/gur-ok/?(.*)($|/)
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.service.app.name }}
+                port:
+                  number: {{ .Values.service.app.port }}
+          - path: /(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.service.app.name }}
+                port:
+                  number: {{ .Values.service.app.port }}
+          - path: /otusapp/gur-ok/actuator/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.service.app.name }}
+                port:
+                  number: 9099
+          - path: /actuator/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.service.app.name }}
+                port:
+                  number: 9099

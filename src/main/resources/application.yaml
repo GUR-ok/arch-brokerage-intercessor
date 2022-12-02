@@ -1,0 +1,63 @@
+server:
+  servlet:
+    context-path: /
+  port: ${SERVER_PORT:8000}
+
+management:
+  server:
+    port: 9090
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: health,prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      slo:
+        http.server.requests: 10ms, 50ms, 100ms, 200ms, 300ms, 500ms
+      percentiles-histogram:
+        "[http.server.requests]": true
+spring:
+  application:
+    name: arch-intercessor
+  main:
+    banner-mode: off
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432}/${DATABASE_NAME:postgres}?currentSchema=${DATABASE_SCHEMA:public}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driverClassName: org.postgresql.Driver
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    ru.gur.archintercessor: INFO
+
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+    firstName: Demo
+  filter:
+    create: All tasks
+  job-execution:
+    enabled: true
+
+app:
+  kafka:
+    enabled: false
+
+kafka:
+  bootstrapAddress: kafka:9094
+  groupId: group1
+
+interaction:
+#  order:
+#    uri: ${PROFILES_URI:http://arch-order-service.arch-gur.svc.cluster.local:9000}

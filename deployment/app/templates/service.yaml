@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.app.name }}
+  namespace: arch-gur
+  labels:
+    app: {{ include "chart.name" . }}-app
+spec:
+  selector:
+    app: {{ include "chart.name" . }}-app
+  ports:
+    - protocol: {{ .Values.service.app.protocol }}
+      name: web
+      port: {{ .Values.service.app.port }}
+      targetPort: {{ .Values.deployment.app.port }}
+    - protocol: {{ .Values.service.app.protocol }}
+      name: actuator
+      port: 9099
+      targetPort: 9090
+  type: {{ .Values.service.app.type }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.db.name }}
+  namespace: arch-gur
+spec:
+  selector:
+    app: {{ include "chart.name" . }}-postgresql
+  ports:
+    - port: {{ .Values.service.db.port }}
+  type: {{ .Values.service.db.type }}
