@@ -30,3 +30,5 @@ service:
 ingress:
   name: otus-project-ingress
   host: arch.homework
+redis:
+  name: redis-intercessor

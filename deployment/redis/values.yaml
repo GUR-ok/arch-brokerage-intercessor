@@ -1,0 +1,3 @@
+redis:
+  name: redis-project
+  port: 6379

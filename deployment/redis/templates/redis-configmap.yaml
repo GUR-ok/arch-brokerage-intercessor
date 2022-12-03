@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.redis.name }}-configmap
+  namespace: arch-gur
+  labels:
+    app: {{ .Values.redis.name }}
+data:
+  master.conf: |
+    requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    maxmemory 400mb
+    maxmemory-policy allkeys-lru
+    maxclients 20000
+    timeout 300
+    appendonly no
+    dbfilename dump.rdb
+    dir /data
+  slave.conf: |
+    requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    slaveof redis-ss-0.redis-ss.redis 6379
+    maxmemory 400mb
+    maxmemory-policy allkeys-lru
+    maxclients 20000
+    timeout 300
+    dir /data

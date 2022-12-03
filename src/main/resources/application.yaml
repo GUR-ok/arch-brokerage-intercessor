@@ -33,6 +33,10 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
     password: ${SPRING_DATASOURCE_PASSWORD:postgres}
     driverClassName: org.postgresql.Driver
+  redis:
+    host: ${REDIS_SERVER:redis}
+    port: 6379
+    password: ${REDIS_PASSWORD:eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81}
 
 logging:
   level:
@@ -42,9 +46,9 @@ logging:
 
 camunda.bpm:
   admin-user:
-    id: demo
-    password: demo
-    firstName: Demo
+    id: ${CAMUNDA_ADMIN_ID:demo}
+    password: ${CAMUNDA_ADMIN_PASSWORD:demo}
+    firstName: ${CAMUNDA_ADMIN_FIRSTNAME:demo}
   filter:
     create: All tasks
   job-execution:
@@ -52,12 +56,33 @@ camunda.bpm:
 
 app:
   kafka:
-    enabled: false
+    enabled: true
+  redis:
+    enabled: true
 
 kafka:
   bootstrapAddress: kafka:9094
   groupId: group1
 
 interaction:
-#  order:
-#    uri: ${PROFILES_URI:http://arch-order-service.arch-gur.svc.cluster.local:9000}
+  profile:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-profile-service.arch-gur.svc.cluster.local:9000}
+  claim:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-claim-service.arch-gur.svc.cluster.local:9000}
+  agreement:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-agreement-service.arch-gur.svc.cluster.local:9000}
+  brokerageaccount:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-brokerageaccount-service.arch-gur.svc.cluster.local:9000}
+  documentgenerator:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-documentgenerator-service.arch-gur.svc.cluster.local:9000}
+  stoplist:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-stoplist-service.arch-gur.svc.cluster.local:9000}
+  productdictionary:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-productdictionary-service.arch-gur.svc.cluster.local:9000}

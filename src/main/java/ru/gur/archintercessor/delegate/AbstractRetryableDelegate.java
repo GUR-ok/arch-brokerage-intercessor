@@ -6,7 +6,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 @Slf4j
-public abstract class AbstractCancelableDelegate implements JavaDelegate {
+public abstract class AbstractRetryableDelegate implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) {
@@ -18,9 +18,13 @@ public abstract class AbstractCancelableDelegate implements JavaDelegate {
             doExecute(execution);
         } catch (Exception e) {
             log.error("Delegate {}; Exception: {}", this.getClass().getSimpleName(), e);
-            throw new BpmnError("delegateCancelableError");
+            throw new BpmnError(getErrorCode());
         }
     }
 
     protected abstract void doExecute(DelegateExecution delegateExecution);
+
+    protected String getErrorCode() {
+        return "retryableErrorCode";
+    }
 }

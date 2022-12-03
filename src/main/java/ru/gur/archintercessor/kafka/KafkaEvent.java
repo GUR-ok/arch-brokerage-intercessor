@@ -2,16 +2,15 @@ package ru.gur.archintercessor.kafka;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import ru.gur.archintercessor.web.request.EventSource;
+import ru.gur.archintercessor.web.request.ProfileUpdatedEventData;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         property = "event"
 )
 @JsonSubTypes({
-//        @JsonSubTypes.Type(value = OrderApproveEventData.class, name = "ORDER_APPROVE"),
-//        @JsonSubTypes.Type(value = OrderCancelEventData.class, name = "ORDER_CANCEL"),
-//        @JsonSubTypes.Type(value = DeliveryCancelEventData.class, name = "DELIVERY_CANCEL"),
-//        @JsonSubTypes.Type(value = ProductReserveCancelEventData.class, name = "PRODUCT_RESERVE_CANCEL")
+        @JsonSubTypes.Type(value = ProfileUpdatedEventData.class, name = "PROFILE_UPDATED")
 })
 public interface KafkaEvent extends EventSource {
 }

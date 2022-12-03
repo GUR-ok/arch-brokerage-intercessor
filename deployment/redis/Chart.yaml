@@ -1,0 +1,9 @@
+apiVersion: v2
+name: otus-gorelov-project
+version: 1.0.0
+description: ArchHomework Redis
+type: application
+maintainers:
+  - name: Yuriy Gorelov
+    email: gur-ok@yandex.ru
+appVersion: 1.0.0

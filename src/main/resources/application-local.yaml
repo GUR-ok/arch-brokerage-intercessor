@@ -1,7 +1,7 @@
 server:
   servlet:
     context-path: /
-  port: 8080
+  port: 8081
 
 management:
   server:
@@ -21,6 +21,10 @@ spring:
       enabled: true
   main:
     banner-mode: CONSOLE
+  redis:
+    host: localhost
+    port: 6379
+    password: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
 
 logging:
   level:
@@ -32,7 +36,8 @@ camunda:
   bpm:
     job-execution:
       enabled: true
-    # http://localhost:8080/camunda/app/admin/default/#/
+    # http://localhost:8081/#/ excamad
+    # http://localhost:8081/camunda/app/admin/default/#/
     admin-user:
       id: d
       password: d
@@ -43,3 +48,53 @@ camunda:
 kafka:
   bootstrapAddress: localhost:9091
   groupId: group1
+
+interaction:
+  profile:
+    stubEnabled: true
+    uri: http://localhost:8180
+  claim:
+    stubEnabled: true
+    uri: http://localhost:8280
+  agreement:
+    stubEnabled: true
+    uri: http://localhost:8380
+  brokerageaccount:
+    stubEnabled: true
+    uri: http://localhost:8480
+  documentgenerator:
+    stubEnabled: true
+    uri: http://localhost:8580
+  stoplist:
+    stubEnabled: true
+    uri: http://localhost:8680
+  productdictionary:
+    stubEnabled: true
+    uri: http://localhost:8780
+
+app:
+  kafka:
+    enabled: false
+  redis:
+    enabled: false
+
+---
+
+spring:
+  profiles: test
+
+interaction:
+  profile:
+    stubEnabled: true
+  claim:
+    stubEnabled: true
+  agreement:
+    stubEnabled: true
+  brokerageaccount:
+    stubEnabled: true
+  documentgenerator:
+    stubEnabled: true
+  stoplist:
+    stubEnabled: true
+  productdictionary:
+    stubEnabled: true

@@ -72,6 +72,31 @@ spec:
                 configMapKeyRef:
                   name: {{ .Values.config.name }}
                   key: SPRING_PROFILES_ACTIVE
+            - name: REDIS_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.config.name }}
+                  key: REDIS_SERVER
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: REDIS_PASSWORD
+            - name: CAMUNDA_ADMIN_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: CAMUNDA_ADMIN_ID
+            - name: CAMUNDA_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: CAMUNDA_ADMIN_PASSWORD
+            - name: CAMUNDA_ADMIN_FIRSTNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: CAMUNDA_ADMIN_FIRSTNAME
 ---
 apiVersion: apps/v1
 kind: StatefulSet
