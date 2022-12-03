@@ -11,5 +11,8 @@ public enum VariableKey {
     CLAIM_ID,
     SIGN_KEY_EXPECTED,
     SIGN_KEY_ACTUAL,
-    KEY_CHECK_RESULT
+    KEY_CHECK_RESULT,
+    CANCEL_FLAG,
+    AGREEMENT_NUMBER,
+    ACCOUNT_ID
 }

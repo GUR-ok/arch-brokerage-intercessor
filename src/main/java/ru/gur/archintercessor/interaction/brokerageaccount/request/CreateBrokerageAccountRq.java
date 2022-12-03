@@ -1,6 +1,11 @@
 package ru.gur.archintercessor.interaction.brokerageaccount.request;
 
-public class CreateBrokerageAccount {
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class CreateBrokerageAccountRq {
 
     private Long agreementNumber;
 }

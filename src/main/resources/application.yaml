@@ -33,6 +33,10 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
     password: ${SPRING_DATASOURCE_PASSWORD:postgres}
     driverClassName: org.postgresql.Driver
+  redis:
+    host: ${REDIS_SERVER:redis}
+    port: 6379
+    password: ${REDIS_PASSWORD:eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81}
 
 logging:
   level:
@@ -52,7 +56,9 @@ camunda.bpm:
 
 app:
   kafka:
-    enabled: false
+    enabled: true
+  redis:
+    enabled: true
 
 kafka:
   bootstrapAddress: kafka:9094

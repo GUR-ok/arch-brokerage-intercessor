@@ -21,6 +21,10 @@ spring:
       enabled: true
   main:
     banner-mode: CONSOLE
+  redis:
+    host: localhost
+    port: 6379
+    password: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
 
 logging:
   level:
@@ -67,3 +71,9 @@ interaction:
   productdictionary:
     stubEnabled: true
     uri: http://localhost:8780
+
+app:
+  kafka:
+    enabled: false
+  redis:
+    enabled: false

@@ -12,7 +12,7 @@ public class AgreementCreationRequest {
 
     private UUID claimId;
 
-    private String profileId;
+    private UUID profileId;
 
     private String productId;
 }
