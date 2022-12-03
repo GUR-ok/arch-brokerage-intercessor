@@ -44,3 +44,26 @@ camunda:
 kafka:
   bootstrapAddress: localhost:9091
   groupId: group1
+
+interaction:
+  profile:
+    stubEnabled: true
+    uri: http://localhost:8180
+  claim:
+    stubEnabled: true
+    uri: http://localhost:8280
+  agreement:
+    stubEnabled: true
+    uri: http://localhost:8380
+  brokerageaccount:
+    stubEnabled: true
+    uri: http://localhost:8480
+  documentgenerator:
+    stubEnabled: true
+    uri: http://localhost:8580
+  stoplist:
+    stubEnabled: true
+    uri: http://localhost:8680
+  productdictionary:
+    stubEnabled: true
+    uri: http://localhost:8780

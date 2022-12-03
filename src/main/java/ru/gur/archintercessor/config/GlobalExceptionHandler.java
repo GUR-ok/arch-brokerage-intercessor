@@ -12,6 +12,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobalException(Exception exception) {
+        log.error(exception.toString());
         log.error(exception.getMessage());
         return new ResponseEntity(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }

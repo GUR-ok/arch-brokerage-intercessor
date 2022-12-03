@@ -10,15 +10,18 @@ import javax.validation.constraints.NotBlank;
 @Data
 @Builder
 @Validated
-public class ProfileUpdatedEventData implements HttpEvent {
+public class ProductUpdatedEventData implements HttpEvent {
 
     @NotBlank
     private String processId;
+
+    @NotBlank
+    private String productId;
 
     @Override
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     // Prevents duplication when serializing to JSON (subtype discriminator property)
     public Event getEvent() {
-        return Event.PROFILE_UPDATED;
+        return Event.PRODUCT_UPDATED;
     }
 }

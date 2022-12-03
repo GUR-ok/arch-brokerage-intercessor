@@ -59,5 +59,24 @@ kafka:
   groupId: group1
 
 interaction:
-#  order:
-#    uri: ${PROFILES_URI:http://arch-order-service.arch-gur.svc.cluster.local:9000}
+  profile:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-profile-service.arch-gur.svc.cluster.local:9000}
+  claim:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-claim-service.arch-gur.svc.cluster.local:9000}
+  agreement:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-agreement-service.arch-gur.svc.cluster.local:9000}
+  brokerageaccount:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-brokerageaccount-service.arch-gur.svc.cluster.local:9000}
+  documentgenerator:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-documentgenerator-service.arch-gur.svc.cluster.local:9000}
+  stoplist:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-stoplist-service.arch-gur.svc.cluster.local:9000}
+  productdictionary:
+    stubEnabled: false
+    uri: ${PROFILES_URI:http://arch-productdictionary-service.arch-gur.svc.cluster.local:9000}

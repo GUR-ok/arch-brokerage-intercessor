@@ -5,7 +5,8 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-import ru.gur.archintercessor.variables.VariableKey;
+import ru.gur.archintercessor.process.VariableKey;
+import ru.gur.archintercessor.web.filter.RequestScopedDataProvider;
 import ru.gur.archintercessor.web.request.Event;
 import ru.gur.archintercessor.web.request.EventSource;
 import ru.gur.archintercessor.web.request.NewClaimReceivedEventData;
@@ -20,6 +21,7 @@ public class NewClaimReceivedHandler implements EventHandler<NewClaimReceivedEve
     private static final String PROCESS_KEY = "BROKERAGE_PROCESS_KEY";
 
     private final RuntimeService runtimeService;
+    private final RequestScopedDataProvider requestScopedDataProvider;
 
     @Override
     public boolean canHandle(final EventSource eventSource) {
@@ -34,6 +36,7 @@ public class NewClaimReceivedHandler implements EventHandler<NewClaimReceivedEve
 
         Map<String,Object> variables = new HashMap<>();
         variables.put(VariableKey.PRODUCT_ID.name(), eventSource.getProductId());
+        variables.put(VariableKey.PROFILE_ID.name(), requestScopedDataProvider.getProfileId());
 
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(PROCESS_KEY, variables);
 
