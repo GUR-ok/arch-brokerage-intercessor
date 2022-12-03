@@ -46,9 +46,9 @@ logging:
 
 camunda.bpm:
   admin-user:
-    id: demo
-    password: demo
-    firstName: Demo
+    id: ${CAMUNDA_ADMIN_ID:demo}
+    password: ${CAMUNDA_ADMIN_PASSWORD:demo}
+    firstName: ${CAMUNDA_ADMIN_FIRSTNAME:demo}
   filter:
     create: All tasks
   job-execution:

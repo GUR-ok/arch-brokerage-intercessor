@@ -6,3 +6,4 @@ metadata:
 data:
   SERVER_PORT: "{{ .Values.config.port }}"
   SPRING_PROFILES_ACTIVE: ""
+  REDIS_SERVER: "{{ .Values.redis.name }}"
