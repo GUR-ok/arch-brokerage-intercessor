@@ -77,3 +77,24 @@ app:
     enabled: false
   redis:
     enabled: false
+
+---
+
+spring:
+  profiles: test
+
+interaction:
+  profile:
+    stubEnabled: true
+  claim:
+    stubEnabled: true
+  agreement:
+    stubEnabled: true
+  brokerageaccount:
+    stubEnabled: true
+  documentgenerator:
+    stubEnabled: true
+  stoplist:
+    stubEnabled: true
+  productdictionary:
+    stubEnabled: true
