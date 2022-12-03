@@ -9,7 +9,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         property = "event"
 )
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = NewClaimReceivedEventData.class, name = "NEW_CLAIM_RECEIVED")
+        @JsonSubTypes.Type(value = NewClaimReceivedEventData.class, name = "NEW_CLAIM_RECEIVED"),
+        @JsonSubTypes.Type(value = ProfileUpdatedEventData.class, name = "PROFILE_UPDATED")
 })
 public interface HttpEvent extends EventSource{
 }

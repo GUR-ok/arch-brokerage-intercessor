@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.springframework.stereotype.Component;
 
 @Slf4j
 public abstract class AbstractCommonDelegate implements JavaDelegate {
@@ -24,5 +25,7 @@ public abstract class AbstractCommonDelegate implements JavaDelegate {
 
     protected abstract void doExecute(DelegateExecution delegateExecution);
 
-    protected abstract String getErrorCode();
+    protected String getErrorCode() {
+        return "commonErrorCode";
+    }
 }

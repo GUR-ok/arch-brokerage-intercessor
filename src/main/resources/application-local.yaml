@@ -1,7 +1,7 @@
 server:
   servlet:
     context-path: /
-  port: 8080
+  port: 8081
 
 management:
   server:
@@ -32,7 +32,8 @@ camunda:
   bpm:
     job-execution:
       enabled: true
-    # http://localhost:8080/camunda/app/admin/default/#/
+    # http://localhost:8081/#/ excamad
+    # http://localhost:8081/camunda/app/admin/default/#/
     admin-user:
       id: d
       password: d

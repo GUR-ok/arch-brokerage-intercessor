@@ -1,4 +1,4 @@
-
+![img.png](img.png)
 
 #### Инструкция по запуску:
 1) `mvn package`
@@ -33,7 +33,8 @@ kubectl create namespace m && helm repo add ingress-nginx https://kubernetes.git
 - дождаться поднятия подов
 
 
-Админская панель доступна по адресу: http://localhost:8080/camunda/app/admin/default/#/
+Админская панель доступна по адресу: http://localhost:8081/camunda/app/admin/default/#/
+Установка Excamad: docker run -d -p 8080:8080 kotovdenis/excamad:latest
 
 kubectl port-forward -n arch-gur arch-intercessor-deployment-76548647fd-bpxbj 8000:8000
 
