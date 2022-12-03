@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import ru.gur.archintercessor.process.VariableKey;
 
 @Component
-public class CheckProfile extends AbstractCommonDelegate {
+public class CheckProfile extends AbstractRetryableDelegate {
 
     @Override
     protected void doExecute(final DelegateExecution delegateExecution) {

@@ -8,7 +8,7 @@ import ru.gur.archintercessor.process.VariableKey;
 
 @Component
 @RequiredArgsConstructor
-public class CancelAgreement extends AbstractCommonDelegate {
+public class CancelAgreement extends AbstractRetryableDelegate {
 
     private final AgreementClient agreementClient;
 

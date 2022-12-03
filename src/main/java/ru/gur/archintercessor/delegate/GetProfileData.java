@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class GetProfileData extends AbstractCommonDelegate {
+public class GetProfileData extends AbstractRetryableDelegate {
 
     private final ProfileClient profileClient;
 

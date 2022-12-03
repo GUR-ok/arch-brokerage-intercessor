@@ -8,7 +8,7 @@ import ru.gur.archintercessor.process.VariableKey;
 
 @Component
 @RequiredArgsConstructor
-public class CheckProduct extends AbstractCommonDelegate {
+public class CheckProduct extends AbstractRetryableDelegate {
 
     private final ProductDictionaryClient productDictionaryClient;
 
