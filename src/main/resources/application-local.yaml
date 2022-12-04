@@ -39,9 +39,9 @@ camunda:
     # http://localhost:8081/#/ excamad
     # http://localhost:8081/camunda/app/admin/default/#/
     admin-user:
-      id: d
-      password: d
-      firstName: d
+      id: demo
+      password: demo
+      firstName: demo
     filter:
       create: All tasks
 
@@ -51,7 +51,7 @@ kafka:
 
 interaction:
   profile:
-    stubEnabled: false
+    stubEnabled: true
     uri: http://localhost:8180
   claim:
     stubEnabled: true

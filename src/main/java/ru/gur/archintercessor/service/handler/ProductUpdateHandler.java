@@ -32,6 +32,7 @@ public class ProductUpdateHandler implements EventHandler<ProductUpdatedEventDat
         runtimeService.createMessageCorrelation(MessageCorrelation.PRODUCT_UPDATED.getMessageRef())
                 .processInstanceId(eventSource.getProcessId())
                 .setVariable(VariableKey.PRODUCT_ID.name(), eventSource.getProductId())
+                .setVariable(VariableKey.NEED_PRODUCT_CHANGE.name(), false)
                 .correlate();
 
         log.info("Event handled: {}", eventSource);
