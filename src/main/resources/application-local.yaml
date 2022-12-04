@@ -74,7 +74,7 @@ interaction:
 
 app:
   kafka:
-    enabled: false
+    enabled: true
   redis:
     enabled: false
 

@@ -318,7 +318,7 @@ code == true</bpmn:conditionExpression>
       <bpmn:outgoing>Flow_13o2cw3</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="Flow_13o2cw3" sourceRef="Activity_16ykqsp" targetRef="Event_15wkq84" />
-    <bpmn:serviceTask id="Activity_1fmb5qd" name="Создать брокерский аккаунт" camunda:asyncBefore="true" camunda:delegateExpression="${createBrokerageAccountRq}">
+    <bpmn:serviceTask id="Activity_1fmb5qd" name="Создать брокерский аккаунт" camunda:asyncBefore="true" camunda:delegateExpression="${createBrokerageAccount}">
       <bpmn:incoming>Flow_0qv3zx4</bpmn:incoming>
       <bpmn:outgoing>Flow_18lsyjf</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -501,7 +501,7 @@ code == true</bpmn:conditionExpression>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0qv3zx4_di" bpmnElement="Flow_0qv3zx4">
         <di:waypoint x="3055" y="477" />
-        <di:waypoint x="3100" y="477" />
+        <di:waypoint x="3120" y="477" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0tccjyj_di" bpmnElement="Flow_0tccjyj">
         <di:waypoint x="320" y="580" />
@@ -534,7 +534,7 @@ code == true</bpmn:conditionExpression>
         <di:waypoint x="3615" y="477" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_18lsyjf_di" bpmnElement="Flow_18lsyjf">
-        <di:waypoint x="3200" y="477" />
+        <di:waypoint x="3220" y="477" />
         <di:waypoint x="3295" y="477" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1i3vyc2_di" bpmnElement="Flow_1i3vyc2">
@@ -629,6 +629,9 @@ code == true</bpmn:conditionExpression>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0tkrht5_di" bpmnElement="Activity_1s8ps1r">
         <dc:Bounds x="1120" y="60" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1hnj4fu_di" bpmnElement="Activity_1fmb5qd">
+        <dc:Bounds x="3120" y="437" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0w2w8bo_di" bpmnElement="Activity_0w2w8bo" isExpanded="true">
         <dc:Bounds x="530" y="920" width="810" height="190" />
@@ -770,9 +773,6 @@ code == true</bpmn:conditionExpression>
       <bpmndi:BPMNShape id="Activity_16ykqsp_di" bpmnElement="Activity_16ykqsp">
         <dc:Bounds x="790" y="630" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1hnj4fu_di" bpmnElement="Activity_1fmb5qd">
-        <dc:Bounds x="3100" y="437" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1v55o4v_di" bpmnElement="Activity_1nnzune">
         <dc:Bounds x="1700" y="437" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -807,6 +807,10 @@ code == true</bpmn:conditionExpression>
         <di:waypoint x="2230" y="437" />
         <di:waypoint x="2252" y="415" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1mq5c6c_di" bpmnElement="Association_1mq5c6c">
+        <di:waypoint x="3185" y="437" />
+        <di:waypoint x="3199" y="400" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_07v3tyr_di" bpmnElement="Event_13r4z2e">
         <dc:Bounds x="302" y="402" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -840,10 +844,6 @@ code == true</bpmn:conditionExpression>
       <bpmndi:BPMNEdge id="Association_1vtltkp_di" bpmnElement="Association_1vtltkp">
         <di:waypoint x="1495" y="630" />
         <di:waypoint x="1510" y="590" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1mq5c6c_di" bpmnElement="Association_1mq5c6c">
-        <di:waypoint x="3174" y="437" />
-        <di:waypoint x="3195" y="400" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0viwjm5_di" bpmnElement="Association_0viwjm5">
         <di:waypoint x="1770" y="535" />

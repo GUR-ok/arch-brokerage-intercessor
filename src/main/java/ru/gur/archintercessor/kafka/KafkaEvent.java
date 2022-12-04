@@ -10,7 +10,8 @@ import ru.gur.archintercessor.web.request.ProfileUpdatedEventData;
         property = "event"
 )
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = ProfileUpdatedEventData.class, name = "PROFILE_UPDATED")
+        @JsonSubTypes.Type(value = ProfileUpdatedEventData.class, name = "PROFILE_UPDATED"),
+        @JsonSubTypes.Type(value = BrokerageNotificationEventData.class, name = "BROKERAGE_NOTIFICATION")
 })
 public interface KafkaEvent extends EventSource {
 }
