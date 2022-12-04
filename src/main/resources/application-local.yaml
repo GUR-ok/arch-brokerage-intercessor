@@ -5,7 +5,7 @@ server:
 
 management:
   server:
-    port: 8003
+    port: 9090
   endpoints:
     web:
       base-path: /
@@ -23,7 +23,7 @@ spring:
     banner-mode: CONSOLE
   redis:
     host: localhost
-    port: 6379
+    port: 63792
     password: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
 
 logging:
@@ -51,7 +51,7 @@ kafka:
 
 interaction:
   profile:
-    stubEnabled: true
+    stubEnabled: false
     uri: http://localhost:8180
   claim:
     stubEnabled: true

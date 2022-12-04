@@ -190,11 +190,11 @@ code == true</bpmn:conditionExpression>
       <bpmn:sequenceFlow id="Flow_0sb0jkw" sourceRef="Activity_1p01nwo" targetRef="Event_0ouby9k" />
       <bpmn:sequenceFlow id="Flow_0lvuhk1" sourceRef="Event_0mezlcm" targetRef="Event_0qjg1tn" />
       <bpmn:sequenceFlow id="Flow_09otoqn" sourceRef="Event_0qjg1tn" targetRef="Activity_1p01nwo" />
-      <bpmn:intermediateCatchEvent id="Event_0qjg1tn">
+      <bpmn:intermediateCatchEvent id="Event_0qjg1tn" camunda:asyncBefore="true">
         <bpmn:incoming>Flow_0lvuhk1</bpmn:incoming>
         <bpmn:outgoing>Flow_09otoqn</bpmn:outgoing>
         <bpmn:timerEventDefinition id="TimerEventDefinition_1hnr7we">
-          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5S</bpmn:timeDuration>
+          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT60S</bpmn:timeDuration>
         </bpmn:timerEventDefinition>
       </bpmn:intermediateCatchEvent>
       <bpmn:startEvent id="Event_0mezlcm" camunda:asyncBefore="true">
@@ -213,7 +213,7 @@ code == true</bpmn:conditionExpression>
     <bpmn:intermediateThrowEvent id="Event_09c0f99" camunda:asyncBefore="true">
       <bpmn:incoming>Flow_0w5z9du</bpmn:incoming>
       <bpmn:outgoing>Flow_0oa171i</bpmn:outgoing>
-      <bpmn:compensateEventDefinition id="CompensateEventDefinition_1wlf2rx" waitForCompletion="false" activityRef="Activity_1nnzune" />
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_1wlf2rx" activityRef="Activity_1nnzune" />
     </bpmn:intermediateThrowEvent>
     <bpmn:sequenceFlow id="Flow_0n4cjr0" sourceRef="Gateway_18valre" targetRef="Activity_1citsfy" />
     <bpmn:sequenceFlow id="Flow_14zbxb7" sourceRef="Activity_1citsfy" targetRef="Activity_1oen93a" />
