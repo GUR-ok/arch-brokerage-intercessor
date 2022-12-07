@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class CreateAgreement extends AbstractCommonDelegate {
+public class CreateAgreement extends AbstractRetryableDelegate {
 
     private final AgreementClient agreementClient;
 

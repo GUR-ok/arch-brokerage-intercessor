@@ -7,9 +7,11 @@ import ru.gur.archintercessor.interaction.brokerageaccount.BrokerageAccountClien
 import ru.gur.archintercessor.interaction.brokerageaccount.request.CreateBrokerageAccountRq;
 import ru.gur.archintercessor.process.VariableKey;
 
+import java.util.UUID;
+
 @Component
 @RequiredArgsConstructor
-public class CreateBrokerageAccount extends AbstractCommonDelegate {
+public class CreateBrokerageAccount extends AbstractRetryableDelegate {
 
     private final BrokerageAccountClient brokerageAccountClient;
 
@@ -18,5 +20,8 @@ public class CreateBrokerageAccount extends AbstractCommonDelegate {
             final CreateBrokerageAccountRq request = CreateBrokerageAccountRq.builder()
                     .agreementNumber((Long) delegateExecution.getVariable(VariableKey.AGREEMENT_NUMBER.name()))
                     .build();
+
+            final UUID brokerageAccountId = brokerageAccountClient.createAccount(request);
+            delegateExecution.setVariable(VariableKey.ACCOUNT_ID.name(), brokerageAccountId);
     }
 }

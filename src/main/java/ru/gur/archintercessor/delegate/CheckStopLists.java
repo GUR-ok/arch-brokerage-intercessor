@@ -9,7 +9,7 @@ import ru.gur.archintercessor.process.VariableKey;
 
 @Component
 @RequiredArgsConstructor
-public class CheckStopLists extends AbstractCommonDelegate {
+public class CheckStopLists extends AbstractRetryableDelegate {
 
     private final StopListClient stopListClient;
 

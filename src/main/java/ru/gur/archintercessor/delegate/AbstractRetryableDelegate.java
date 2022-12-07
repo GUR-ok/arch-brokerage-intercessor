@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.springframework.web.client.RestClientException;
 
 @Slf4j
 public abstract class AbstractRetryableDelegate implements JavaDelegate {
@@ -16,6 +17,9 @@ public abstract class AbstractRetryableDelegate implements JavaDelegate {
             System.out.println("ActivityId: " + execution.getCurrentActivityId());
 
             doExecute(execution);
+        } catch (RestClientException restClientException) {
+            log.error("Delegate {}; Exception: {}", this.getClass().getSimpleName(), restClientException);
+            throw new RuntimeException("retry");
         } catch (Exception e) {
             log.error("Delegate {}; Exception: {}", this.getClass().getSimpleName(), e);
             throw new BpmnError(getErrorCode());
@@ -25,6 +29,6 @@ public abstract class AbstractRetryableDelegate implements JavaDelegate {
     protected abstract void doExecute(DelegateExecution delegateExecution);
 
     protected String getErrorCode() {
-        return "retryableErrorCode";
+        return "commonErrorCode";
     }
 }

@@ -5,4 +5,6 @@ import ru.gur.archintercessor.interaction.documentgenerator.request.PrintedFormG
 public interface DocumentGeneratorClient {
 
     String createDocument(PrintedFormGenerationRequest printedFormGenerationRequest);
+
+    String getUrl(String reportName);
 }

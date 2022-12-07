@@ -13,6 +13,7 @@ import ru.gur.archintercessor.web.request.NewClaimReceivedEventData;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor

@@ -16,6 +16,8 @@ import org.springframework.util.Assert;
 public class Producer {
     private final KafkaTemplate<String, String> kafkaTemplateString;
 
+    public static final String NOTIFICATION_TOPIC = "brokerage-notification";
+
     public void sendEvent(final String topic, final String key, final KafkaEvent event) throws JsonProcessingException {
         Assert.hasText(topic, "topic must not be blank");
         Assert.hasText(key, "key must not be blank");

@@ -67,22 +67,31 @@ kafka:
 interaction:
   profile:
     stubEnabled: false
-    uri: ${PROFILES_URI:http://arch-profile-service.arch-gur.svc.cluster.local:9000}
+    uri: ${PROFILES_URI:http://arch-profiles-service.arch-gur.svc.cluster.local:9000}
   claim:
-    stubEnabled: false
+    stubEnabled: true
     uri: ${PROFILES_URI:http://arch-claim-service.arch-gur.svc.cluster.local:9000}
   agreement:
-    stubEnabled: false
+    stubEnabled: true
     uri: ${PROFILES_URI:http://arch-agreement-service.arch-gur.svc.cluster.local:9000}
   brokerageaccount:
-    stubEnabled: false
+    stubEnabled: true
     uri: ${PROFILES_URI:http://arch-brokerageaccount-service.arch-gur.svc.cluster.local:9000}
   documentgenerator:
     stubEnabled: false
     uri: ${PROFILES_URI:http://arch-documentgenerator-service.arch-gur.svc.cluster.local:9000}
   stoplist:
-    stubEnabled: false
+    stubEnabled: true
     uri: ${PROFILES_URI:http://arch-stoplist-service.arch-gur.svc.cluster.local:9000}
   productdictionary:
-    stubEnabled: false
+    stubEnabled: true
     uri: ${PROFILES_URI:http://arch-productdictionary-service.arch-gur.svc.cluster.local:9000}
+
+---
+
+spring:
+  profiles: redisoff
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
