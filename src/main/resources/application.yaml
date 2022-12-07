@@ -78,7 +78,7 @@ interaction:
     stubEnabled: true
     uri: ${PROFILES_URI:http://arch-brokerageaccount-service.arch-gur.svc.cluster.local:9000}
   documentgenerator:
-    stubEnabled: true
+    stubEnabled: false
     uri: ${PROFILES_URI:http://arch-documentgenerator-service.arch-gur.svc.cluster.local:9000}
   stoplist:
     stubEnabled: true

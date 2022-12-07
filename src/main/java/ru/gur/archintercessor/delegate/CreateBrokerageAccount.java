@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class CreateBrokerageAccount extends AbstractCommonDelegate {
+public class CreateBrokerageAccount extends AbstractRetryableDelegate {
 
     private final BrokerageAccountClient brokerageAccountClient;
 

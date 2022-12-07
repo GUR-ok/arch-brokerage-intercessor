@@ -18,4 +18,9 @@ public class DocumentGeneratorClientStub implements DocumentGeneratorClient {
 
         return RandomStringUtils.randomAlphanumeric(25);
     }
+
+    @Override
+    public String getUrl(String reportName) {
+        return "some_url";
+    }
 }

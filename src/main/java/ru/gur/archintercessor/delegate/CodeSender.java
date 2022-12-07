@@ -29,7 +29,8 @@ public class CodeSender extends AbstractCommonDelegate {
         final BrokerageNotificationEventData brokerageNotificationEventData =
                 BrokerageNotificationEventData.builder()
                         .accountId((UUID) delegateExecution.getVariable(VariableKey.PROFILE_ID.name()))
-                        .message("Для подтверждения заявки введите код " + key)
+                        .message("Для подтверждения заявки введите код " + key + " Договор доступен по ссылке: " +
+                                delegateExecution.getVariable(VariableKey.REPORT_URL.name()))
                         .build();
 
         try {
