@@ -26,7 +26,7 @@ public class GenerateReport extends AbstractCommonDelegate {
         final String agreementNumber = String.valueOf(delegateExecution.getVariable(VariableKey.AGREEMENT_NUMBER.name()));
         final String firstName = data.getName();
         final String passportNumber = data.getPassportNumber();
-        final String product = String.valueOf(delegateExecution.getVariable(VariableKey.PRODUCT_ID.name()));
+        final String product = (String) delegateExecution.getVariable(VariableKey.PRODUCT_NAME.name());
 
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("«dd» MMMM yyyy", new Locale("ru"));
         final String date = LocalDate.now().format(formatter);

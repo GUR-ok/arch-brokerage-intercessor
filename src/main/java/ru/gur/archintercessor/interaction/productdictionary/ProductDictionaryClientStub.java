@@ -6,8 +6,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import ru.gur.archintercessor.interaction.productdictionary.response.ProductInfo;
 
-import java.util.Random;
-
 @Primary
 @Component
 @ConditionalOnProperty(prefix = "interaction", name = "productdictionary.stubEnabled", matchIfMissing = false)
@@ -19,9 +17,10 @@ public class ProductDictionaryClientStub implements ProductDictionaryClient {
                 this.getClass().getSimpleName() + " called");
 
         return ProductInfo.builder()
-                .productName("Product-" + RandomStringUtils.randomAlphanumeric(5))
+                .productName("Супер VIP \"" + RandomStringUtils.randomAlphanumeric(5) + "\"")
                 .rate(0.1)
-                .active(new Random().nextBoolean())
+                .active(productId.equals("111"))
+//                .active(new Random().nextBoolean())
                 .build();
     }
 }

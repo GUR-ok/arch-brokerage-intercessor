@@ -19,6 +19,7 @@ public class NotificationDelegate extends AbstractCommonDelegate {
     private final Producer producer;
 
     private static final String LOCAL_VAR_REF = "NotificationType";
+
     @Override
     protected void doExecute(final DelegateExecution delegateExecution) {
         final Boolean flag = (Boolean) delegateExecution.getVariable((String) delegateExecution.getVariableLocal(LOCAL_VAR_REF));

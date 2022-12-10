@@ -69,7 +69,7 @@ interaction:
     stubEnabled: false
     uri: ${PROFILES_URI:http://arch-profiles-service.arch-gur.svc.cluster.local:9000}
   claim:
-    stubEnabled: true
+    stubEnabled: false
     uri: ${PROFILES_URI:http://arch-claim-service.arch-gur.svc.cluster.local:9000}
   agreement:
     stubEnabled: true

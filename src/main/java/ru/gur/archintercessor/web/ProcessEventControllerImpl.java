@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 import ru.gur.archintercessor.service.ProcessService;
 import ru.gur.archintercessor.web.filter.RequestScopedDataProvider;
-import ru.gur.archintercessor.web.filter.SessionScopedDataProvider;
 import ru.gur.archintercessor.web.request.HttpEvent;
 import ru.gur.archintercessor.web.response.EventProcessingResult;
 
@@ -35,9 +34,9 @@ public class ProcessEventControllerImpl implements ProcessEventController {
 
         requestScopedDataProvider.setProfileId(
                 Optional.ofNullable(httpServletRequest.getHeader("x-custom"))
+                        .or(() -> Optional.ofNullable(httpServletRequest.getHeader("profileId")))
                         .map(UUID::fromString)
-                        .orElse(null)
-        );
+                        .orElseThrow(() -> new RuntimeException("ProfilId is null")));
 
         return EventProcessingResult.builder()
                 .processId(processService.processEvent(httpEvent))

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import ru.gur.archintercessor.interaction.agreement.request.AgreementCreationRequest;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Primary
 @Component
@@ -17,8 +17,7 @@ public class AgreementClientStub implements AgreementClient {
         System.out.println("STUB method " + Thread.currentThread().getStackTrace()[0].getMethodName() + " of class" +
                 this.getClass().getSimpleName() + " called");
 
-        final Random random = new Random();
-        return random.nextLong();
+        return ThreadLocalRandom.current().nextLong(100000, 999999);
     }
 
     @Override

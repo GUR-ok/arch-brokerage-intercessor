@@ -22,14 +22,13 @@ public class DocumentGeneratorClientImpl implements DocumentGeneratorClient {
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Value("${interaction.documentgenerator.uri}")
-    private URI profileUri;
+    private URI documentGeneratorUri;
 
     @Override
     public String createDocument(final PrintedFormGenerationRequest printedFormGenerationRequest) {
         Assert.notNull(printedFormGenerationRequest, "printedFormGenerationRequest must not be null");
 
-
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(profileUri +
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(documentGeneratorUri +
                 "/reports");
 
         final RequestEntity requestEntity =
@@ -43,10 +42,9 @@ public class DocumentGeneratorClientImpl implements DocumentGeneratorClient {
     @Override
     public String getUrl(String reportName) {
 
-
         final MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("name", reportName);
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(profileUri +
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(documentGeneratorUri +
                 "/reports").queryParams(params);
 
         final RequestEntity requestEntity =

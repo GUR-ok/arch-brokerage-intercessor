@@ -54,8 +54,8 @@ interaction:
     stubEnabled: true
     uri: http://localhost:8180
   claim:
-    stubEnabled: true
-    uri: http://localhost:8280
+    stubEnabled: false
+    uri: http://localhost:8281
   agreement:
     stubEnabled: true
     uri: http://localhost:8380
