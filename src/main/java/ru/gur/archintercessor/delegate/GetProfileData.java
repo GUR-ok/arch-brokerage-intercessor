@@ -24,7 +24,7 @@ public class GetProfileData extends AbstractRetryableDelegate {
         final ProfileInfo profileInfo = profileClient.getProfileInfo(profileID);
 
         delegateExecution.setVariable(VariableKey.PROFILE_DATA.name(), ProfileData.builder()
-                .name(Strings.concat(profileInfo.getFirstName(), profileInfo.getLastName()))
+                .name(Strings.concat(profileInfo.getFirstName() + " ", profileInfo.getLastName()))
                 .passportNumber(profileInfo.getPassportNumber())
                 .build());
     }

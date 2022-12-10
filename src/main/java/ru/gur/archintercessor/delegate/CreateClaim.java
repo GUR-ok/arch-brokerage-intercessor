@@ -9,8 +9,10 @@ import org.springframework.web.client.RestClientException;
 import ru.gur.archintercessor.exception.ClaimAlreadyExistException;
 import ru.gur.archintercessor.interaction.claim.ClaimClient;
 import ru.gur.archintercessor.interaction.claim.request.CreateClaimRequest;
+import ru.gur.archintercessor.interaction.claim.response.ClaimDto;
 import ru.gur.archintercessor.process.VariableKey;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -42,12 +44,18 @@ public class CreateClaim extends AbstractRetryableDelegate {
 
     @Override
     protected void doExecute(final DelegateExecution delegateExecution) {
-        final CreateClaimRequest createClaimRequest = CreateClaimRequest.builder()
-                .processId(delegateExecution.getProcessInstanceId())
-                .profileId((UUID) delegateExecution.getVariable(VariableKey.PROFILE_ID.name()))
-                .build();
-        final UUID claimId = claimClient.createNewClaim(createClaimRequest);
+        final List<ClaimDto> claims = claimClient.findNotCompletedClaims(
+                (UUID) delegateExecution.getVariable(VariableKey.PROFILE_ID.name()));
+        if (claims.isEmpty()) {
+            final CreateClaimRequest createClaimRequest = CreateClaimRequest.builder()
+                    .processId(delegateExecution.getProcessInstanceId())
+                    .profileId((UUID) delegateExecution.getVariable(VariableKey.PROFILE_ID.name()))
+                    .build();
+            final UUID claimId = claimClient.createNewClaim(createClaimRequest);
 
-        delegateExecution.setVariable(VariableKey.CLAIM_ID.name(), claimId);
+            delegateExecution.setVariable(VariableKey.CLAIM_ID.name(), claimId);
+        } else {
+            throw new ClaimAlreadyExistException("Not completed claims: " + claims.toString());
+        }
     }
 }

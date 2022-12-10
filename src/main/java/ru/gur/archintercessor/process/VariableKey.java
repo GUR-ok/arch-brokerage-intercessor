@@ -4,6 +4,7 @@ public enum VariableKey {
 
     PROFILE_ID,
     PRODUCT_ID,
+    PRODUCT_NAME,
     PROFILE_CHECK_RESULT,
     PRODUCT_CHECK_RESULT,
     PROFILE_DATA,

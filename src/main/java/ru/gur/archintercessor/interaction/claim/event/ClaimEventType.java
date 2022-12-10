@@ -5,5 +5,7 @@ public enum ClaimEventType {
     IN_PROGRESS,
     WAIT_FOR_SIGN,
     CANCEL,
-    DONE
+    REJECTED,
+    DONE,
+    UPDATE
 }

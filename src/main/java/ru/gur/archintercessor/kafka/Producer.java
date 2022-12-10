@@ -17,6 +17,7 @@ public class Producer {
     private final KafkaTemplate<String, String> kafkaTemplateString;
 
     public static final String NOTIFICATION_TOPIC = "brokerage-notification";
+    public static final String CLAIM_TOPIC = "brokerage-claim";
 
     public void sendEvent(final String topic, final String key, final KafkaEvent event) throws JsonProcessingException {
         Assert.hasText(topic, "topic must not be blank");

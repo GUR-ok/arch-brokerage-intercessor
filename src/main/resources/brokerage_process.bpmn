@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0san9m5" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.10.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0san9m5" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.10.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:process id="BROKERAGE_PROCESS_KEY" name="Brokerage" isExecutable="true" camunda:versionTag="tag">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_0br7whh</bpmn:outgoing>
@@ -7,7 +7,12 @@
     <bpmn:endEvent id="Event_0xev7uq">
       <bpmn:incoming>Flow_1qf61mv</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="Activity_1hp9p4a" name="Обновить заявку IN_PROGRESS" camunda:asyncBefore="true" camunda:delegateExpression="${createClaim}">
+    <bpmn:serviceTask id="Activity_1hp9p4a" name="Обновить заявку IN_PROGRESS" camunda:asyncBefore="true" camunda:delegateExpression="${claimEventExecutorDelegate}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="ClaimEventType">IN_PROGRESS</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_01ofpd3</bpmn:incoming>
       <bpmn:outgoing>Flow_0mmm9a1</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -32,7 +37,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_1a41pz4" sourceRef="Event_15wkq84" targetRef="Gateway_18valre" />
     <bpmn:intermediateCatchEvent id="Event_15wkq84" name="Ожидать уточнения данных" camunda:asyncBefore="true">
-      <bpmn:incoming>Flow_13o2cw3</bpmn:incoming>
+      <bpmn:incoming>Flow_07y01u2</bpmn:incoming>
       <bpmn:outgoing>Flow_1a41pz4</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1aamkiw" messageRef="Message_02j2zs9" />
     </bpmn:intermediateCatchEvent>
@@ -76,10 +81,6 @@ code == true</bpmn:conditionExpression>
       <bpmn:incoming>Flow_1kjqzp1</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0545vhp" sourceRef="Activity_1nnzune" targetRef="Activity_1vixu3m" />
-    <bpmn:task id="Activity_1vixu3m" name="Обновить Заявку Данными о договоре">
-      <bpmn:incoming>Flow_0545vhp</bpmn:incoming>
-      <bpmn:outgoing>Flow_0al12jl</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="Flow_0al12jl" sourceRef="Activity_1vixu3m" targetRef="Activity_1e0uv5p" />
     <bpmn:sequenceFlow id="Flow_1kjqzp1" sourceRef="Activity_0auqfxv" targetRef="Event_0flmtvz" />
     <bpmn:sequenceFlow id="Flow_0znglre" sourceRef="Activity_1e0uv5p" targetRef="Activity_0m390te" />
@@ -95,15 +96,7 @@ code == true</bpmn:conditionExpression>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1i3vyc2" sourceRef="Activity_120asts" targetRef="Event_0s966dh" />
     <bpmn:sequenceFlow id="Flow_18lsyjf" sourceRef="Activity_1fmb5qd" targetRef="Gateway_0wudbnn" />
-    <bpmn:task id="Activity_1o8asus" name="Обновить заявку COMPLETED">
-      <bpmn:incoming>Flow_0azmxw4</bpmn:incoming>
-      <bpmn:outgoing>Flow_11jqnmh</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="Flow_11jqnmh" sourceRef="Activity_1o8asus" targetRef="Gateway_0kqsk6j" />
-    <bpmn:task id="Activity_0j89zac" name="Обновить заявку CANCELED">
-      <bpmn:incoming>Flow_0oa171i</bpmn:incoming>
-      <bpmn:outgoing>Flow_1nytq2i</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="Flow_1nytq2i" sourceRef="Activity_0j89zac" targetRef="Activity_120asts" />
     <bpmn:sequenceFlow id="Flow_0azmxw4" sourceRef="Gateway_0wudbnn" targetRef="Activity_1o8asus" />
     <bpmn:parallelGateway id="Gateway_0wudbnn">
@@ -170,7 +163,7 @@ code == true</bpmn:conditionExpression>
       <bpmn:outgoing>Flow_1a905hi</bpmn:outgoing>
     </bpmn:parallelGateway>
     <bpmn:sequenceFlow id="Flow_1a905hi" sourceRef="Gateway_0on7u22" targetRef="Activity_1s8ps1r" />
-    <bpmn:sequenceFlow id="Flow_07y01u2" sourceRef="Gateway_1hj18e3" targetRef="Activity_16ykqsp" />
+    <bpmn:sequenceFlow id="Flow_07y01u2" sourceRef="Gateway_1hj18e3" targetRef="Event_15wkq84" />
     <bpmn:parallelGateway id="Gateway_1hj18e3" camunda:asyncBefore="true">
       <bpmn:incoming>Flow_1mfus8z</bpmn:incoming>
       <bpmn:outgoing>Flow_07y01u2</bpmn:outgoing>
@@ -184,7 +177,7 @@ code == true</bpmn:conditionExpression>
     <bpmn:serviceTask id="Activity_0i6wq2t" name="Уведомить клиента о необходимости уточнить данные" camunda:delegateExpression="${notificationDelegate}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="NotificationType">NEED_PROFILE_DATA</camunda:inputParameter>
+          <camunda:inputParameter name="NotificationType">Необходимо уточнить паспортные данные</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0f65itf</bpmn:incoming>
@@ -214,10 +207,6 @@ code == true</bpmn:conditionExpression>
       <bpmn:incoming>Flow_0br7whh</bpmn:incoming>
       <bpmn:outgoing>Flow_1fyjoo8</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:task id="Activity_17zawdu" name="Обновить заявку WAITING_FOR_SIGN" camunda:asyncBefore="true">
-      <bpmn:incoming>Flow_0rc02ok</bpmn:incoming>
-      <bpmn:outgoing>Flow_0oay59c</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="Flow_0oay59c" sourceRef="Activity_17zawdu" targetRef="Gateway_0jfefaa" />
     <bpmn:sequenceFlow id="Flow_0ijfhai" sourceRef="Gateway_1k1dx7z" targetRef="Gateway_18valre" />
     <bpmn:parallelGateway id="Gateway_1k1dx7z">
@@ -239,7 +228,7 @@ code == true</bpmn:conditionExpression>
     <bpmn:serviceTask id="Activity_1s8ps1r" name="Уведомить клиента о необходимости сменить тариф" camunda:delegateExpression="${notificationDelegate}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="NotificationType">NEED_PRODUCT_CHANGE</camunda:inputParameter>
+          <camunda:inputParameter name="NotificationType">Необходимо изменить тариф</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1a905hi</bpmn:incoming>
@@ -247,7 +236,7 @@ code == true</bpmn:conditionExpression>
     <bpmn:serviceTask id="Activity_1su5zq0" name="Уведомить клиента об уже активной заявке" camunda:asyncBefore="true" camunda:delegateExpression="${notificationDelegate}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="NotificationType">CLAIM_ALREADY_IN_PROGRESS</camunda:inputParameter>
+          <camunda:inputParameter name="NotificationType">Имеются незавершенные заявки</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1pmv2ai</bpmn:incoming>
@@ -258,7 +247,7 @@ code == true</bpmn:conditionExpression>
     <bpmn:serviceTask id="Activity_0q4wkkt" name="Уведомить клиента о создании счета" camunda:delegateExpression="${notificationDelegate}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="NotificationType">COMPLETED</camunda:inputParameter>
+          <camunda:inputParameter name="NotificationType">Заявка ВЫПОЛНЕНА</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1clxa5k</bpmn:incoming>
@@ -267,7 +256,7 @@ code == true</bpmn:conditionExpression>
     <bpmn:serviceTask id="Activity_120asts" name="Уведомить клиента об отмене подписания" camunda:delegateExpression="${notificationDelegate}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="NotificationType">CANCELED</camunda:inputParameter>
+          <camunda:inputParameter name="NotificationType">Заявка ОТМЕНЕНА. Клиент отказался от подписания</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1nytq2i</bpmn:incoming>
@@ -283,7 +272,7 @@ code == true</bpmn:conditionExpression>
     <bpmn:serviceTask id="Activity_0auqfxv" name="Уведомить клиента о невозможности создания заявки" camunda:delegateExpression="${notificationDelegate}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="NotificationType">REJECTED</camunda:inputParameter>
+          <camunda:inputParameter name="NotificationType">Заявка ОТКЛОНЕНА. Клиент не прошел проверку</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0wmc0jv</bpmn:incoming>
@@ -298,11 +287,6 @@ code == true</bpmn:conditionExpression>
       <bpmn:incoming>Flow_0at25df</bpmn:incoming>
       <bpmn:outgoing>Flow_0vqvpkf</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:task id="Activity_16ykqsp" name="Поместить идентификатор процесса в ожидающие корреляции">
-      <bpmn:incoming>Flow_07y01u2</bpmn:incoming>
-      <bpmn:outgoing>Flow_13o2cw3</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:sequenceFlow id="Flow_13o2cw3" sourceRef="Activity_16ykqsp" targetRef="Event_15wkq84" />
     <bpmn:serviceTask id="Activity_1fmb5qd" name="Создать брокерский аккаунт" camunda:asyncBefore="true" camunda:delegateExpression="${createBrokerageAccount}">
       <bpmn:extensionElements>
         <camunda:failedJobRetryTimeCycle>R5/PT15S</camunda:failedJobRetryTimeCycle>
@@ -323,10 +307,6 @@ code == true</bpmn:conditionExpression>
       </bpmn:extensionElements>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_0wmc0jv" sourceRef="Activity_0gwt568" targetRef="Activity_0auqfxv" />
-    <bpmn:task id="Activity_0gwt568" name="Обновить заявку REJECTED">
-      <bpmn:incoming>Flow_10fv9ww</bpmn:incoming>
-      <bpmn:outgoing>Flow_0wmc0jv</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:serviceTask id="Activity_1e0uv5p" name="Сгенерировать печатную форму" camunda:asyncBefore="true" camunda:delegateExpression="${generateReport}">
       <bpmn:incoming>Flow_0al12jl</bpmn:incoming>
       <bpmn:outgoing>Flow_0znglre</bpmn:outgoing>
@@ -335,6 +315,51 @@ code == true</bpmn:conditionExpression>
     <bpmn:serviceTask id="Activity_0m390te" name="Получение ссылки на договор" camunda:asyncBefore="true" camunda:delegateExpression="${getReport}">
       <bpmn:incoming>Flow_0znglre</bpmn:incoming>
       <bpmn:outgoing>Flow_0rc02ok</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_17zawdu" name="Обновить заявку WAITING_FOR_SIGN" camunda:asyncBefore="true" camunda:delegateExpression="${claimEventExecutorDelegate}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="ClaimEventType">WAIT_FOR_SIGN</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0rc02ok</bpmn:incoming>
+      <bpmn:outgoing>Flow_0oay59c</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1o8asus" name="Обновить заявку COMPLETED" camunda:delegateExpression="${claimEventExecutorDelegate}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="ClaimEventType">DONE</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0azmxw4</bpmn:incoming>
+      <bpmn:outgoing>Flow_11jqnmh</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0j89zac" name="Обновить заявку CANCELED" camunda:delegateExpression="${claimEventExecutorDelegate}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="ClaimEventType">CANCEL</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0oa171i</bpmn:incoming>
+      <bpmn:outgoing>Flow_1nytq2i</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0gwt568" name="Обновить заявку REJECTED" camunda:asyncBefore="true" camunda:delegateExpression="${claimEventExecutorDelegate}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="ClaimEventType">REJECTED</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_10fv9ww</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wmc0jv</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1vixu3m" name="Обновить Заявку Данными о договоре" camunda:asyncBefore="true" camunda:delegateExpression="${claimEventExecutorDelegate}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="ClaimEventType">UPDATE</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0545vhp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0al12jl</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:textAnnotation id="TextAnnotation_0dtcqhg">
       <bpmn:text>Данные профиля обновлены</bpmn:text>
@@ -553,10 +578,6 @@ code == true</bpmn:conditionExpression>
         <di:waypoint x="413" y="575" />
         <di:waypoint x="525" y="575" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_13o2cw3_di" bpmnElement="Flow_13o2cw3">
-        <di:waypoint x="760" y="767" />
-        <di:waypoint x="708" y="767" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0tccjyj_di" bpmnElement="Flow_0tccjyj">
         <di:waypoint x="290" y="677" />
         <di:waypoint x="290" y="739" />
@@ -599,7 +620,7 @@ code == true</bpmn:conditionExpression>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_07y01u2_di" bpmnElement="Flow_07y01u2">
         <di:waypoint x="905" y="767" />
-        <di:waypoint x="860" y="767" />
+        <di:waypoint x="708" y="767" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0f65itf_di" bpmnElement="Flow_0f65itf">
         <di:waypoint x="930" y="792" />
@@ -620,26 +641,20 @@ code == true</bpmn:conditionExpression>
       <bpmndi:BPMNShape id="Event_0xev7uq_di" bpmnElement="Event_0xev7uq">
         <dc:Bounds x="3762" y="459" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1rtwh7o_di" bpmnElement="Activity_1hp9p4a">
+      <bpmndi:BPMNShape id="Activity_1rtwh7o_di" bpmnElement="Activity_1hp9p4a" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
         <dc:Bounds x="1490" y="437" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0m8lo90_di" bpmnElement="Activity_1ni4r56">
+      <bpmndi:BPMNShape id="Activity_0m8lo90_di" bpmnElement="Activity_1ni4r56" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
         <dc:Bounds x="1210" y="437" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_136z872_di" bpmnElement="Gateway_136z872" isMarkerVisible="true">
         <dc:Bounds x="1345" y="452" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1hnj4fu_di" bpmnElement="Activity_1fmb5qd">
+      <bpmndi:BPMNShape id="Activity_1hnj4fu_di" bpmnElement="Activity_1fmb5qd" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
         <dc:Bounds x="3120" y="437" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0flmtvz_di" bpmnElement="Event_0flmtvz">
         <dc:Bounds x="1662" y="652" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0ugvjb2_di" bpmnElement="Activity_0gwt568">
-        <dc:Bounds x="1320" y="630" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0j89zac_di" bpmnElement="Activity_0j89zac">
-        <dc:Bounds x="3120" y="590" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0ujr8d8_di" bpmnElement="Activity_120asts">
         <dc:Bounds x="3270" y="590" width="100" height="80" />
@@ -692,13 +707,10 @@ code == true</bpmn:conditionExpression>
       <bpmndi:BPMNShape id="Activity_1wxwp6o_di" bpmnElement="Activity_1su5zq0">
         <dc:Bounds x="240" y="597" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0whp6rs_di" bpmnElement="Activity_0wk58r1">
+      <bpmndi:BPMNShape id="Activity_0whp6rs_di" bpmnElement="Activity_0wk58r1" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
         <dc:Bounds x="730" y="347" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_16ykqsp_di" bpmnElement="Activity_16ykqsp">
-        <dc:Bounds x="760" y="727" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1sabwek_di" bpmnElement="Activity_createClaim">
+      <bpmndi:BPMNShape id="Activity_1sabwek_di" bpmnElement="Activity_createClaim" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
         <dc:Bounds x="220" y="437" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1rwv8v7_di" bpmnElement="Gateway_1rwv8v7" isMarkerVisible="true">
@@ -713,17 +725,11 @@ code == true</bpmn:conditionExpression>
       <bpmndi:BPMNShape id="Gateway_18valre_di" bpmnElement="Gateway_18valre" isMarkerVisible="true">
         <dc:Bounds x="525" y="550" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1vixu3m_di" bpmnElement="Activity_1vixu3m">
-        <dc:Bounds x="1950" y="437" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_11kq0t3_di" bpmnElement="Event_0ggfeei">
         <dc:Bounds x="2752" y="459" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="2729" y="502" width="83" height="40" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1o8asus_di" bpmnElement="Activity_1o8asus">
-        <dc:Bounds x="3440" y="437" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_07fddj9_di" bpmnElement="Gateway_0wudbnn">
         <dc:Bounds x="3295" y="452" width="50" height="50" />
@@ -749,10 +755,10 @@ code == true</bpmn:conditionExpression>
       <bpmndi:BPMNShape id="Activity_0e6o082_di" bpmnElement="Activity_083d5g7">
         <dc:Bounds x="2840" y="437" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1v55o4v_di" bpmnElement="Activity_1nnzune">
+      <bpmndi:BPMNShape id="Activity_1v55o4v_di" bpmnElement="Activity_1nnzune" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
         <dc:Bounds x="1700" y="437" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1kxng7z_di" bpmnElement="Activity_14sosr3">
+      <bpmndi:BPMNShape id="Activity_1kxng7z_di" bpmnElement="Activity_14sosr3" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
         <dc:Bounds x="1820" y="560" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_1xz1o98_di" bpmnElement="TextAnnotation_1xz1o98">
@@ -770,14 +776,26 @@ code == true</bpmn:conditionExpression>
       <bpmndi:BPMNShape id="Activity_1wcxp5f_di" bpmnElement="Activity_0auqfxv">
         <dc:Bounds x="1490" y="630" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_17zawdu_di" bpmnElement="Activity_17zawdu">
-        <dc:Bounds x="2380" y="437" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1w4ms71_di" bpmnElement="Activity_1e0uv5p">
         <dc:Bounds x="2100" y="437" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0en77cu_di" bpmnElement="Activity_0m390te">
         <dc:Bounds x="2230" y="437" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pjdd8i_di" bpmnElement="Activity_17zawdu" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="2380" y="437" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1uzd2gy_di" bpmnElement="Activity_1o8asus" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="3440" y="437" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0y16885_di" bpmnElement="Activity_0j89zac" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="3120" y="590" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1avhnsi_di" bpmnElement="Activity_0gwt568" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="1320" y="630" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0caflw7_di" bpmnElement="Activity_1vixu3m" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="1950" y="437" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_1mq5c6c_di" bpmnElement="Association_1mq5c6c">
         <di:waypoint x="3185" y="437" />
