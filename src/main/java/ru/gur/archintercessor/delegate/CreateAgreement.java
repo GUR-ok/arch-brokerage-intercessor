@@ -7,6 +7,7 @@ import ru.gur.archintercessor.interaction.agreement.AgreementClient;
 import ru.gur.archintercessor.interaction.agreement.request.AgreementCreationRequest;
 import ru.gur.archintercessor.process.VariableKey;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Component
