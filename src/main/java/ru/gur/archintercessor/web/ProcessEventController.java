@@ -1,5 +1,8 @@
 package ru.gur.archintercessor.web;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +22,13 @@ public interface ProcessEventController {
     String ROOT_PATH = "/process/events";
 
     @PostMapping
-    EventProcessingResult processEvent(@Valid @RequestBody HttpEvent httpEvent,
-                                       HttpServletRequest httpServletRequest);
+    @Operation(summary = "Обработать событие")
+    EventProcessingResult processEvent(@Valid @RequestBody @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(examples = {
+            @ExampleObject(
+                    name = "Person sample",
+                    summary = "person example",
+                    value =
+                            "{\"event\":\"NEW_CLAIM_RECEIVED\",\"productId\":\"123\"}"
+            )
+    })) HttpEvent httpEvent, HttpServletRequest httpServletRequest);
 }

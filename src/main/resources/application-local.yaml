@@ -63,7 +63,7 @@ interaction:
     stubEnabled: true
     uri: http://localhost:8480
   documentgenerator:
-    stubEnabled: true
+    stubEnabled: false
     uri: http://localhost:8580
   stoplist:
     stubEnabled: true
