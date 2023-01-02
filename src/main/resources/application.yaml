@@ -70,22 +70,22 @@ interaction:
     uri: ${PROFILES_URI:http://arch-profiles-service.arch-gur.svc.cluster.local:9000}
   claim:
     stubEnabled: false
-    uri: ${PROFILES_URI:http://arch-claim-service.arch-gur.svc.cluster.local:9000}
+    uri: ${CLAIM_URI:http://arch-claim-service.arch-gur.svc.cluster.local:9000}
   agreement:
     stubEnabled: true
-    uri: ${PROFILES_URI:http://arch-agreement-service.arch-gur.svc.cluster.local:9000}
+    uri: ${AGREEMENT_URI:http://arch-agreement-service.arch-gur.svc.cluster.local:9000}
   brokerageaccount:
     stubEnabled: true
-    uri: ${PROFILES_URI:http://arch-brokerageaccount-service.arch-gur.svc.cluster.local:9000}
+    uri: ${BROKER_ACCOUNT_URI:http://arch-brokerageaccount-service.arch-gur.svc.cluster.local:9000}
   documentgenerator:
     stubEnabled: false
-    uri: ${PROFILES_URI:http://arch-documentgenerator-service.arch-gur.svc.cluster.local:9000}
+    uri: ${DOCGEN_URI:http://arch-documentgenerator-service.arch-gur.svc.cluster.local:9000}
   stoplist:
     stubEnabled: true
-    uri: ${PROFILES_URI:http://arch-stoplist-service.arch-gur.svc.cluster.local:9000}
+    uri: ${STOPLIST_URI:http://arch-stoplist-service.arch-gur.svc.cluster.local:9000}
   productdictionary:
     stubEnabled: true
-    uri: ${PROFILES_URI:http://arch-productdictionary-service.arch-gur.svc.cluster.local:9000}
+    uri: ${DICTIONARY_URI:http://arch-productdictionary-service.arch-gur.svc.cluster.local:9000}
 
 ---
 
