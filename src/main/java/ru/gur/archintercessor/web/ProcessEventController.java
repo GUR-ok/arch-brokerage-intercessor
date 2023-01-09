@@ -30,5 +30,5 @@ public interface ProcessEventController {
                     value =
                             "{\"event\":\"NEW_CLAIM_RECEIVED\",\"productId\":\"123\"}"
             )
-    })) HttpEvent httpEvent, HttpServletRequest httpServletRequest);
+    })) HttpEvent httpEvent);
 }

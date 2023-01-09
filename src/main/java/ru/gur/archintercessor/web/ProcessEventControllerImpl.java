@@ -7,7 +7,6 @@ import ru.gur.archintercessor.service.ProcessService;
 import ru.gur.archintercessor.web.request.HttpEvent;
 import ru.gur.archintercessor.web.response.EventProcessingResult;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Slf4j
@@ -18,7 +17,7 @@ public class ProcessEventControllerImpl implements ProcessEventController {
     private final ProcessService processService;
 
     @Override
-    public EventProcessingResult processEvent(@Valid HttpEvent httpEvent, HttpServletRequest httpServletRequest) {
+    public EventProcessingResult processEvent(@Valid HttpEvent httpEvent) {
         return EventProcessingResult.builder()
                 .processId(processService.processEvent(httpEvent))
                 .build();
