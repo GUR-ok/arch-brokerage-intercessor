@@ -36,12 +36,12 @@ public class RequestFilter extends OncePerRequestFilter {
                 Optional.ofNullable(httpServletRequest.getHeader("x-custom"))
                         .or(() -> Optional.ofNullable(httpServletRequest.getHeader("profileId")))
                         .map(UUID::fromString)
-                        .orElseThrow(() -> new RuntimeException("ProfilId is null")));
+                        .orElse(UUID.randomUUID()));
         sessionScopedDataProvider.setProfileId(
                 Optional.ofNullable(httpServletRequest.getHeader("x-custom"))
                         .or(() -> Optional.ofNullable(httpServletRequest.getHeader("profileId")))
                         .map(UUID::fromString)
-                        .orElseThrow(() -> new RuntimeException("ProfilId is null")));
+                        .orElse(UUID.randomUUID()));
 
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }

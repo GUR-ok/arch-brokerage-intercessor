@@ -34,7 +34,11 @@ kubectl create namespace m && helm repo add ingress-nginx https://kubernetes.git
 
 
 Админская панель доступна по адресу: http://localhost:8081/camunda/app/admin/default/#/
-Установка Excamad: docker run -d -p 8080:8080 kotovdenis/excamad:latest
+Установка Excamad: docker run -d -p 8085:8080 kotovdenis/excamad:latest
+docker run -d -p 8085:8080 kotovdenis/excamad:latest
+# http://localhost:8085/#/ excamad
+В экзамаде ввести http://localhost:8081/engine-rest/
+или http://<host>:<port>/<context-path>/engine-rest/
 
 kubectl port-forward -n arch-gur arch-intercessor-deployment-76548647fd-bpxbj 8000:8000
 
