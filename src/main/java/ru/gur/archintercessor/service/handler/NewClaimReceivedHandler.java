@@ -33,7 +33,9 @@ public class NewClaimReceivedHandler implements EventHandler<NewClaimReceivedEve
         Assert.notNull(eventSource, "EventSource must not be null");
 
         Map<String,Object> variables = new HashMap<>();
-        variables.put(VariableKey.PRODUCT_ID.name(), eventSource.getProductId());
+        variables.put("TestVar", eventSource.getProductId());
+        variables.put("EventData", eventSource);
+
 
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(PROCESS_KEY, variables);
 
