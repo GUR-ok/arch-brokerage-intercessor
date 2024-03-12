@@ -40,3 +40,13 @@ services:
       - "9092:9092"
       - "9091:9091"
       - "9101:9101"
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    restart: "no"
+    ports:
+      - "9000:9000"
+    environment:
+      KAFKA_BROKERCONNECT: "kafka:9092"
+    depends_on:
+      - "kafka"
